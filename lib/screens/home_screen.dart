@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen>
   List<Task> _tasks = [];
   String _searchQuery = '';
   String _sortBy = 'date'; // 'date', 'priority', 'alphabetical'
+  bool _showCompletedTasks = true;
   bool _isSearching = false;
   late TabController _tabController;
 
@@ -47,11 +48,15 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
-  // Load tasks from local storage and re-schedule notifications
+  // Load tasks and preferences from local storage and re-schedule notifications
   Future<void> _loadTasks() async {
     final tasks = await _storageService.loadTasks();
+    final defaultSort = await _storageService.loadDefaultSort();
+    final showCompleted = await _storageService.loadShowCompletedTasks();
     setState(() {
       _tasks = tasks;
+      _sortBy = defaultSort;
+      _showCompletedTasks = showCompleted;
     });
     // Re-schedule notifications for all incomplete tasks with future due dates
     await _notificationService.rescheduleAll(_tasks);
@@ -104,6 +109,17 @@ class _HomeScreenState extends State<HomeScreen>
     _saveTasks();
   }
 
+  void _clearAllTasks() {
+    // Cancel all scheduled notifications before wiping tasks
+    for (final task in _tasks) {
+      _notificationService.cancelTaskNotification(task.id);
+    }
+    setState(() {
+      _tasks.clear();
+    });
+    _storageService.clearAllTasks();
+  }
+
   // Filter tasks into "Today" tab
   List<Task> get _todayTasks {
     return _filterAndSort(
@@ -125,6 +141,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   // Filter tasks into "Completed" tab
   List<Task> get _completedTasks {
+    if (!_showCompletedTasks) return [];
     return _filterAndSort(_tasks.where((t) => t.isCompleted));
   }
 
@@ -215,9 +232,11 @@ class _HomeScreenState extends State<HomeScreen>
                   currentThemeMode: widget.currentThemeMode,
                   onThemeModeChanged: widget.onThemeModeChanged,
                   onClearCompleted: _clearCompletedTasks,
+                  onClearAll: _clearAllTasks,
+                  onSettingsChanged: _loadTasks,
                 ),
               ),
-            );
+            ).then((_) => _loadTasks());
           },
         ),
         title: _isSearching

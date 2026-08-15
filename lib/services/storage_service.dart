@@ -5,6 +5,11 @@ import '../models/task.dart';
 class StorageService {
   static const String _tasksKey = 'tasks';
   static const String _themeModeKey = 'theme_mode';
+  static const String _defaultCategoryKey = 'default_category';
+  static const String _defaultPriorityKey = 'default_priority';
+  static const String _defaultSortKey = 'default_sort';
+  static const String _showCompletedTasksKey = 'show_completed_tasks';
+  static const String _taskRemindersKey = 'task_reminders';
 
   // Save the list of tasks to shared_preferences
   Future<void> saveTasks(List<Task> tasks) async {
@@ -37,5 +42,66 @@ class StorageService {
   Future<String> loadThemeMode() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_themeModeKey) ?? 'system';
+  }
+
+  // Default Category ('Study', 'Work', 'Personal', 'Other')
+  Future<void> saveDefaultCategory(String category) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_defaultCategoryKey, category);
+  }
+
+  Future<String> loadDefaultCategory() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_defaultCategoryKey) ?? 'Personal';
+  }
+
+  // Default Priority ('low', 'medium', 'high')
+  Future<void> saveDefaultPriority(String priority) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_defaultPriorityKey, priority);
+  }
+
+  Future<String> loadDefaultPriority() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_defaultPriorityKey) ?? 'low';
+  }
+
+  // Default Sort Order ('date', 'priority', 'alphabetical')
+  Future<void> saveDefaultSort(String sort) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_defaultSortKey, sort);
+  }
+
+  Future<String> loadDefaultSort() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_defaultSortKey) ?? 'date';
+  }
+
+  // Show Completed Tasks
+  Future<void> saveShowCompletedTasks(bool show) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_showCompletedTasksKey, show);
+  }
+
+  Future<bool> loadShowCompletedTasks() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_showCompletedTasksKey) ?? true;
+  }
+
+  // Task Reminders
+  Future<void> saveTaskReminders(bool enabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_taskRemindersKey, enabled);
+  }
+
+  Future<bool> loadTaskReminders() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_taskRemindersKey) ?? false;
+  }
+
+  // Clear all tasks
+  Future<void> clearAllTasks() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_tasksKey);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
+import '../services/storage_service.dart';
 import '../utils/constants.dart';
 import '../utils/helpers.dart';
 
@@ -37,6 +38,22 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
     if (widget.task?.dueDate != null) {
       _selectedDate = widget.task!.dueDate;
       _selectedTime = TimeOfDay.fromDateTime(widget.task!.dueDate!);
+    }
+
+    if (!_isEditing) {
+      _loadDefaults();
+    }
+  }
+
+  Future<void> _loadDefaults() async {
+    final storage = StorageService();
+    final defaultCat = await storage.loadDefaultCategory();
+    final defaultPri = await storage.loadDefaultPriority();
+    if (mounted) {
+      setState(() {
+        _selectedCategory = defaultCat;
+        _selectedPriority = defaultPri;
+      });
     }
   }
 
