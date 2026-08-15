@@ -108,8 +108,9 @@ lib/
 <img width="540" height="1200" alt="image" src="https://github.com/user-attachments/assets/c8312c8d-3a0f-4263-8b5b-c2df6b07a23a" />
 ### Add Task
 <img width="1080" height="2400" alt="Screenshot_20260815_103530" src="https://github.com/user-attachments/assets/4a970856-4b3f-432d-862b-75f16fe0c859" />
-
-
+### Settings
+<img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/b866d549-7589-4d0a-ae18-22dcf05fe249" />
+<img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/34c90254-35c1-4c98-847d-a5b2f6b74ac4" />
 
 ## Future Improvements
 
