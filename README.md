@@ -76,9 +76,9 @@ lib/
    flutter run
    ```
 
-## Screenshots
+## 📱 Screenshots
 
-> Add screenshots here.
+### Home Screen
 
 ## Future Improvements
 
