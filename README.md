@@ -30,27 +30,53 @@ This project is a well-structured To-Do application built with Flutter and Mater
 
 ## Project Structure
 
-```
+## 📂 Project Structure
+
+```text
 lib/
-├── main.dart                         # App entry point and theme management
+├── main.dart
+│   └── Application entry point and theme configuration
+│
 ├── models/
-│   └── task.dart                     # Task data model
+│   └── task.dart
+│       └── Task data model and task properties
+│
 ├── screens/
-│   ├── home_screen.dart              # Main screen with tabs, search, sort
-│   ├── task_detail_screen.dart       # Full task detail view
-│   ├── add_edit_task_screen.dart     # Form for adding/editing tasks
-│   └── settings_screen.dart          # App settings
+│   ├── home_screen.dart
+│   │   └── Main dashboard with task tabs, search, and sorting
+│   │
+│   ├── task_detail_screen.dart
+│   │   └── Displays complete task information
+│   │
+│   ├── add_edit_task_screen.dart
+│   │   └── Add and edit task form
+│   │
+│   └── settings_screen.dart
+│       └── Application settings and theme configuration
+│
 ├── widgets/
-│   ├── task_card.dart                # Individual task card
-│   ├── task_stats.dart               # Progress bar widget
-│   ├── empty_state.dart              # Empty state illustrations
-│   └── custom_chip.dart              # Reusable colored chip
+│   ├── task_card.dart
+│   │   └── Reusable task card UI
+│   │
+│   ├── task_stats.dart
+│   │   └── Task statistics and progress indicator
+│   │
+│   ├── empty_state.dart
+│   │   └── Empty-state UI for screens without tasks
+│   │
+│   └── custom_chip.dart
+│       └── Reusable category and priority chip
+│
 ├── services/
-│   └── storage_service.dart          # Local storage management
+│   └── storage_service.dart
+│       └── Local task storage using SharedPreferences
+│
 └── utils/
-    ├── constants.dart                # App-wide constants
-    └── helpers.dart                  # Date and utility helpers
-```
+    ├── constants.dart
+    │   └── Application-wide constants
+    │
+    └── helpers.dart
+        └── Date formatting and utility functions
 
 ## Installation Instructions
 
@@ -59,10 +85,10 @@ lib/
    ```bash
    git clone <repository-url>
    ```
+```markdown
 3. Navigate into the project directory:
    ```bash
-   cd todo_app
-   ```
+   cd TO-Do-app
 4. Install dependencies:
    ```bash
    flutter pub get
@@ -79,6 +105,11 @@ lib/
 ## 📱 Screenshots
 
 ### Home Screen
+<img width="540" height="1200" alt="image" src="https://github.com/user-attachments/assets/c8312c8d-3a0f-4263-8b5b-c2df6b07a23a" />
+### Add Task
+<img width="1080" height="2400" alt="Screenshot_20260815_103530" src="https://github.com/user-attachments/assets/4a970856-4b3f-432d-862b-75f16fe0c859" />
+
+
 
 ## Future Improvements
 
